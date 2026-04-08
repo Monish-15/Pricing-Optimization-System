@@ -139,15 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
             currentPredictedPrice = data.recommended_price;
             
-            // Handle Drift
-            const driftWarning = document.getElementById('drift-warning');
-            if (data.drift_detected) {
-                driftWarning.classList.remove('hidden');
-                document.getElementById('drift-msg').textContent = data.drift_message;
-            } else {
-                driftWarning.classList.add('hidden');
-            }
-            
             // Show result
             document.getElementById('prediction-result').classList.remove('hidden');
             document.getElementById('predicted-price').textContent = currentPredictedPrice.toFixed(2);

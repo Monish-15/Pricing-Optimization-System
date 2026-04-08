@@ -6,7 +6,6 @@
     <title>Nexus | Dynamic Pricing MLOps Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="/static/drift_styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -63,10 +62,6 @@
                 </form>
 
                 <div id="prediction-result" class="hidden result-box">
-                    <div id="drift-warning" class="hidden drift-alert">
-                        <i class="fa-solid fa-triangle-exclamation"></i> 
-                        <span id="drift-msg">Data Drift Detected! Abnormal Demand.</span>
-                    </div>
                     <h3>AI Recommended Price</h3>
                     <div class="price-display">₹<span id="predicted-price">0.00</span></div>
                     

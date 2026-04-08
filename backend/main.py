@@ -49,18 +49,7 @@ class FeedbackRequest(BaseModel):
 def predict_price(req: PredictionRequest):
     price = mlops_pipeline.get_optimal_price(req.demand, req.supply, req.time)
     
-    # Determine Data Drift
-    drift_detected = False
-    drift_msg = ""
-    # Assuming baseline 50-300 demand, 20-150 supply
-    if req.demand > 280 or req.demand < 60:
-        drift_detected = True
-        drift_msg = f"Data Drift Detected! Demand ({req.demand}) is outside normal training bounds."
-    elif req.supply > 140 or req.supply < 30:
-        drift_detected = True
-        drift_msg = f"Data Drift Detected! Supply ({req.supply}) is outside normal training bounds."
-        
-    return {"recommended_price": price, "drift_detected": drift_detected, "drift_message": drift_msg}
+    return {"recommended_price": price}
 
 @app.post("/feedback")
 def submit_feedback(req: FeedbackRequest, background_tasks: BackgroundTasks):
