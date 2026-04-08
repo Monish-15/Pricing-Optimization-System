@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Dynamic Pricing MLOps Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/drift_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="app-container">
+        <header class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-chart-line"></i> Nexus<span class="highlight">Price_</span>
+            </div>
+            <div class="nav-links">
+                <div class="status-indicator">
+                    <span class="pulsing-dot"></span> System Live & Learning
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Left panel: Simulation Controls -->
+            <div class="panel glass-panel controls-panel">
+                <div class="panel-header">
+                    <h2><i class="fa-solid fa-sliders"></i> A/B Testing & Simulation</h2>
+                    <p>Simulate market conditions and trigger MLOps feedback loop.</p>
+                </div>
+                
+                <form id="simulator-form" class="sim-form">
+                    <div class="input-group">
+                        <label>Demand (Users/traffic)</label>
+                        <input type="range" id="sim-demand" min="10" max="500" value="150" class="slider">
+                        <span id="sim-demand-val" class="slider-val">150</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Supply (Inventory available)</label>
+                        <input type="range" id="sim-supply" min="10" max="300" value="80" class="slider">
+                        <span id="sim-supply-val" class="slider-val">80</span>
+                    </div>
+                    <div class="input-group">
+                        <label>Time of Day</label>
+                        <select id="sim-time" class="dropdown">
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening" selected>Evening</option>
+                            <option value="night">Night</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="btn-predict">
+                        <i class="fa-solid fa-bolt"></i> Predict Optimal Price
+                    </button>
+                </form>
+
+                <div id="prediction-result" class="hidden result-box">
+                    <div id="drift-warning" class="hidden drift-alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i> 
+                        <span id="drift-msg">Data Drift Detected! Abnormal Demand.</span>
+                    </div>
+                    <h3>AI Recommended Price</h3>
+                    <div class="price-display">₹<span id="predicted-price">0.00</span></div>
+                    
+                    <div class="feedback-section">
+                        <p>Simulate User Response:</p>
+                        <div class="input-group">
+                            <label>Actual Sales (Conversion)</label>
+                            <input type="number" id="sim-sales" value="0" class="text-input">
+                        </div>
+                        <button id="btn-feedback" class="btn btn-secondary">
+                            <i class="fa-solid fa-rotate"></i> Send Feedback & Retrain
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle/Right panel: Dashboard & Analytics -->
+            <div class="panel glass-panel analytics-panel">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-title">Total Revenue</span>
+                            <span class="metric-value">₹<span id="metric-revenue">--</span></span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fa-solid fa-robot"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-title">Model Version</span>
+                            <span class="metric-value" id="metric-version">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-title">Model RMSE</span>
+                            <span class="metric-value" id="metric-rmse">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="fa-solid fa-database"></i></div>
+                        <div class="metric-info">
+                            <span class="metric-title">Training Samples</span>
+                            <span class="metric-value" id="metric-samples">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <h3>Revenue & Price Optimization Trends</h3>
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="recent-logs">
+                    <h3><i class="fa-solid fa-list-check"></i> Recent Closed-Loop Decisions</h3>
+                    <div class="table-container">
+                        <table id="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Event ID</th>
+                                    <th>Demand</th>
+                                    <th>Supply</th>
+                                    <th>Time</th>
+                                    <th>Assigned Price</th>
+                                    <th>Sales</th>
+                                    <th>Generated Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
