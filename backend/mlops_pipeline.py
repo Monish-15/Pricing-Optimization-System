@@ -131,4 +131,4 @@ def get_optimal_price(demand, supply, time_of_day):
             best_revenue = expected_revenue
             optimal_price = test_price
 
-    return round(optimal_price, 2)
+    return float(round(optimal_price, 2))
